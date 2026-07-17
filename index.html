@@ -7,18 +7,11 @@
   <meta name="theme-color" content="#173f35" />
   <title>MineralAR — Minerais em 3D e WebAR</title>
   <link rel="stylesheet" href="style.css?v=0.1.0" />
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-    }
-  }
-  </script>
+  <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
 </head>
 <body>
   <video id="cameraVideo" playsinline webkit-playsinline muted autoplay></video>
-  <canvas id="scene" aria-label="Visualização tridimensional da estrutura mineral"></canvas>
+  <div id="scene" aria-label="Visualização tridimensional da estrutura mineral"></div>
   <canvas id="handOverlay" aria-hidden="true"></canvas>
 
   <header class="topbar">
