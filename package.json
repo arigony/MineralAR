@@ -1,0 +1,11 @@
+{
+  "name": "mineralar",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --check src/app.js && node --check src/minerals.js && node --check src/cif-meta.js && node --check src/camera-toggle.js",
+    "test": "node --test tests/*.test.mjs",
+    "smoke:remote": "node tests/remote-smoke.mjs"
+  }
+}
