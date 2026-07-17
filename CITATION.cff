@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use MineralAR in teaching or research, please cite this software."
+title: "MineralAR: an open browser-based 3D and WebAR mineral structure explorer for chemical and geoscience education"
+type: software
+version: "0.1.0"
+date-released: "2026-07-17"
+authors:
+  - family-names: "Souto"
+    given-names: "André Arigony"
+    orcid: "https://orcid.org/0000-0002-2437-8767"
+repository-code: "https://github.com/arigony/MineralAR"
+url: "https://arigony.github.io/MineralAR/"
+license: "MIT"
+keywords:
+  - mineralogy
+  - crystallography
+  - CIF
+  - chemical education
+  - geoscience education
+  - augmented reality
+  - WebAR
+  - 3Dmol.js
+  - MediaPipe
