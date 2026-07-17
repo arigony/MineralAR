@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="MineralAR — explorador educacional de estruturas minerais em 3D e realidade aumentada." />
+  <meta name="theme-color" content="#173f35" />
+  <title>MineralAR — Minerais em 3D e WebAR</title>
+  <link rel="stylesheet" href="style.css?v=0.1.0" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <video id="cameraVideo" playsinline webkit-playsinline muted autoplay></video>
+  <canvas id="scene" aria-label="Visualização tridimensional da estrutura mineral"></canvas>
+  <canvas id="handOverlay" aria-hidden="true"></canvas>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">M</div>
+      <div>
+        <h1>Mineral<span>AR</span></h1>
+        <p>Mineralogia · CIF experimental · 3D · WebAR</p>
+      </div>
+    </div>
+    <div class="view-actions" aria-label="Modos de visualização">
+      <button id="galleryMode" class="button active" type="button">3D</button>
+      <button id="arMode" class="button" type="button">AR</button>
+      <button id="cameraFlip" class="button" type="button">Câmera: frontal</button>
+    </div>
+  </header>
+
+  <aside class="control-panel" aria-label="Controles do MineralAR">
+    <div class="panel-heading">
+      <div>
+        <span class="eyebrow">Versão 0.1.0</span>
+        <h2>Galeria mineralógica</h2>
+      </div>
+      <button id="collapseControls" class="icon-button" type="button" aria-label="Recolher controles">−</button>
+    </div>
+
+    <div id="controlBody" class="control-body">
+      <p class="intro">Estruturas experimentais com proveniência preservada. Selecione um mineral para explorar a cela, o empacotamento e a coordenação.</p>
+
+      <label class="search-label" for="mineralSearch">
+        Buscar na coleção
+        <input id="mineralSearch" type="search" placeholder="Ex.: quartzo, óxido, silicato…" autocomplete="off" />
+      </label>
+
+      <div id="mineralGrid" class="mineral-grid" aria-live="polite"></div>
+
+      <div class="divider"><span>visualização</span></div>
+
+      <div class="settings-grid">
+        <label>
+          Representação
+          <select id="representation">
+            <option value="ball-stick">Ball-and-stick</option>
+            <option value="space-fill">Space-filling</option>
+            <option value="wire">Wireframe</option>
+          </select>
+        </label>
+        <label>
+          Supercela
+          <select id="supercell">
+            <option value="1">1 × 1 × 1</option>
+            <option value="2">2 × 2 × 2</option>
+            <option value="3">3 × 3 × 3</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="check-row">
+        <label><input id="showCell" type="checkbox" checked /> Mostrar cela</label>
+        <label><input id="showBonds" type="checkbox" checked /> Mostrar conexões</label>
+      </div>
+
+      <div class="action-row">
+        <button id="resetView" class="secondary" type="button">Centralizar</button>
+        <button id="downloadCif" class="secondary" type="button" disabled>Baixar CIF</button>
+      </div>
+
+      <div class="divider"><span>arquivo próprio</span></div>
+      <label class="upload-box" for="cifFile">
+        <strong>Abrir arquivo CIF</strong>
+        <span>Processamento local no navegador</span>
+        <input id="cifFile" type="file" accept=".cif,.mcif,text/plain,chemical/x-cif" />
+      </label>
+
+      <p id="status" class="status" role="status" aria-live="polite">Carregando a coleção mineralógica…</p>
+    </div>
+  </aside>
+
+  <section id="infoCard" class="info-card collapsed" aria-live="polite">
+    <button id="infoToggle" class="info-toggle" type="button" aria-expanded="false">
+      <div class="info-icon">◇</div>
+      <div class="info-summary">
+        <h2 id="mineralName">MineralAR</h2>
+        <p id="mineralFormula">Aguardando estrutura</p>
+        <small id="mineralMeta">Selecione um mineral</small>
+      </div>
+      <span class="chevron">⌃</span>
+    </button>
+    <div class="info-body">
+      <p id="teachingNote" class="teaching-note"></p>
+      <div id="infoGrid" class="info-grid"></div>
+      <div id="citationBox" class="citation-box hidden"></div>
+      <a id="sourceLink" class="source-link hidden" target="_blank" rel="noopener noreferrer">Abrir fonte estrutural</a>
+      <small class="source-note">Os CIFs preservam os identificadores e as referências das determinações originais. Verifique a publicação primária antes de uso em pesquisa.</small>
+    </div>
+  </section>
+
+  <div id="handStatus" class="hand-status hidden">AR por toque disponível</div>
+  <div id="loading" class="loading hidden" role="status">
+    <div class="spinner"></div>
+    <p id="loadingText">Carregando…</p>
+  </div>
+  <div id="toastBox" class="toast-box" aria-live="polite"></div>
+
+  <script src="src/camera-toggle.js?v=0.1.0"></script>
+  <script type="module" src="src/app.js?v=0.1.0"></script>
+</body>
+</html>
