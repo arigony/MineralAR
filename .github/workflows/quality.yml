@@ -21,3 +21,15 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: npm run smoke:remote
+      - name: Verify deployed MineralAR page
+        run: |
+          for attempt in {1..12}; do
+            if curl -fsSL --max-time 20 https://arigony.github.io/MineralAR/ | grep -q "MineralAR"; then
+              echo "MineralAR GitHub Pages is live"
+              exit 0
+            fi
+            echo "Attempt $attempt: page not ready yet"
+            sleep 10
+          done
+          echo "MineralAR GitHub Pages did not become available"
+          exit 1
